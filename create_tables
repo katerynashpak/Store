@@ -1,0 +1,201 @@
+#!/usr/bin/python3
+
+import sqlite3
+
+connection = sqlite3.connect("bookstore.db")
+cVar = connection.cursor()
+
+cVar.execute("""DROP TABLE IF EXISTS author""")
+cVar.execute("""DROP TABLE IF EXISTS book_author""")
+cVar.execute("""DROP TABLE IF EXISTS book_language""")
+cVar.execute("""DROP TABLE IF EXISTS book""")
+cVar.execute("""DROP TABLE IF EXISTS publisher""")
+cVar.execute("""DROP TABLE IF EXISTS address_status""")
+cVar.execute("""DROP TABLE IF EXISTS customer_address""")
+cVar.execute("""DROP TABLE IF EXISTS customer""")
+cVar.execute("""DROP TABLE IF EXISTS country""")
+cVar.execute("""DROP TABLE IF EXISTS address""")
+cVar.execute("""DROP TABLE IF EXISTS cust_order""")
+cVar.execute("""DROP TABLE IF EXISTS order_line""")
+cVar.execute("""DROP TABLE IF EXISTS shipping_method""")
+cVar.execute("""DROP TABLE IF EXISTS order_status""")
+cVar.execute("""DROP TABLE IF EXISTS order_history""")
+
+
+
+
+connection.commit()
+
+sql1 = """CREATE TABLE author(
+    author_id INT,
+    author_name VARCHAR(100),
+    PRIMARY KEY (author_id)
+    );"""
+
+
+
+sql2 = """CREATE TABLE book_author(
+    book_id INT,
+    author_id INT,
+    PRIMARY KEY (book_id,author_id),
+    FOREIGN KEY (book_id) REFERENCES book(book_id),
+    FOREIGN KEY (author_id) REFERENCES author(author_id)
+    );"""
+
+
+
+sql3 = """CREATE TABLE book_language(
+    language_id INT,
+    language_code VARCHAR(100),
+    language_name VARCHAR(100),
+    PRIMARY KEY (language_id)
+    );"""
+
+#isbn13 ex.: 979-1-23456-789-6
+
+sql4 = """CREATE TABLE book(
+    book_id INT,
+    title VARCHAR(100),
+    isbn13 VARCHAR(17), 
+    language_id INT,
+    num_pages INT,
+    publication_date DATE,
+    publisher_id INT,
+    PRIMARY KEY (book_id),
+    FOREIGN KEY (language_id) REFERENCES book_language(language_id),
+    FOREIGN KEY (publisher_id) REFERENCES publisher(publisher_id)
+    );"""
+
+sql5 = """CREATE TABLE publisher(
+    publisher_id INT,
+    publisher_name VARCHAR(100),
+    PRIMARY KEY (publisher_id)
+    );"""
+
+
+
+sql6 = """CREATE TABLE address_status(
+    status_id INT,
+    address_status VARCHAR(100),
+    PRIMARY KEY (status_id)
+    );"""
+
+
+sql7 = """CREATE TABLE customer_address(
+    customer_id INT,
+    address_id INT,
+    status_id INT,
+    PRIMARY KEY (customer_id, address_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    FOREIGN KEY (address_id) REFERENCES address(address_id),
+    FOREIGN KEY (status_id) REFERENCES address_status(status_id)
+    );"""
+
+
+
+sql8 = """CREATE TABLE customer(
+    customer_id INT,
+    fisrt_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(100),
+    PRIMARY KEY (customer_id)
+    );"""
+
+
+sql9 = """CREATE TABLE cust_order(
+    order_id INT,
+    order_date DATETIME,
+    customer_id INT,
+    shipping_method_id INT,
+    dest_address_id INT,
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (customer_id) REFERENCES cutomer(customer_id),
+    FOREIGN KEY (shipping_method_id) REFERENCES shipping_method(method_id),
+    FOREIGN KEY (dest_address_id) REFERENCES address(address_id)
+    );"""
+
+
+
+sql10 = """CREATE TABLE order_line(
+    line_id INT,
+    order_id INT,
+    book_id INT,
+    price INT,
+    PRIMARY KEY (line_id),
+    FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
+    FOREIGN KEY (book_id) REFERENCES book(book_id)
+    );"""
+
+
+
+sql11 = """CREATE TABLE shipping_method(
+    method_id INT,
+    method_name VARCHAR(100),
+    cost INT,
+    PRIMARY KEY (method_id)
+    );"""
+
+
+
+
+sql12 = """CREATE TABLE country(
+    country_id INT,
+    country_name VARCHAR(100),
+    PRIMARY KEY (country_id)
+    );"""
+
+
+
+
+sql13 = """CREATE TABLE address(
+    address_id INT,
+    street_number VARCHAR(100),
+    street_name VARCHAR(100),
+    city VARCHAR(100),
+    country_id INT,
+    PRIMARY KEY (address_id),
+    FOREIGN KEY (country_id) REFERENCES country(country_id)
+    );"""
+
+
+
+sql14 = """CREATE TABLE order_status(
+    status_id INT,
+    status_value VARCHAR(100),
+    PRIMARY KEY (status_id)
+    );"""
+
+
+sql15 = """CREATE TABLE order_history(
+    history_id INT,
+    order_id INT,
+    status_id INT,
+    status_date DATE,
+    PRIMARY KEY (history_id),
+    FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
+    FOREIGN KEY (status_id) REFERENCES order_status(status_id)
+    );"""
+
+cVar.execute(sql1)
+cVar.execute(sql2)
+cVar.execute(sql3)
+cVar.execute(sql4)
+cVar.execute(sql5)
+cVar.execute(sql6)
+cVar.execute(sql7)
+cVar.execute(sql8)
+cVar.execute(sql9)
+cVar.execute(sql10)
+cVar.execute(sql11)
+cVar.execute(sql12)
+cVar.execute(sql13)
+cVar.execute(sql14)
+cVar.execute(sql15)
+
+
+
+
+
+connection.close()
+
+
