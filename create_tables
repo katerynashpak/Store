@@ -5,6 +5,7 @@ import sqlite3
 connection = sqlite3.connect("bookstore.db")
 cVar = connection.cursor()
 
+
 cVar.execute("""DROP TABLE IF EXISTS author""")
 cVar.execute("""DROP TABLE IF EXISTS book_author""")
 cVar.execute("""DROP TABLE IF EXISTS book_language""")
@@ -95,7 +96,7 @@ sql7 = """CREATE TABLE customer_address(
 
 sql8 = """CREATE TABLE customer(
     customer_id INT,
-    fisrt_name VARCHAR(100),
+    first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(100),
     PRIMARY KEY (customer_id)
@@ -196,6 +197,6 @@ cVar.execute(sql15)
 
 
 
-connection.close()
+#connection.close()
 
 

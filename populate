@@ -1,0 +1,92 @@
+#!/usr/bin/python3
+
+import sqlite3
+connection = sqlite3.connect("bookstore.db")
+cVar = connection.cursor()
+
+exec(open("create_tables").read())
+
+
+s1 = "INSERT INTO author (author_name, author_id) VALUES ('Meg  Cabot', 1),('Kelley Armstrong', 2),('Suzanne Collins', 3),('Charles Dickens', 4),('Tony Talbot', 5),('Ray Bradbury', 6),('May Alcott', 7),('Stephen Lawhead', 8),('Pittacus Lore', 9),('Charlotte Bronte', 10)"
+
+cVar.execute(s1)
+
+
+#select = "SELECT * from author"
+#for row in connection.execute(select):
+#    print(row)
+
+
+
+s2 = "INSERT INTO publisher (publisher_name, publisher_id) VALUES ('Scholastic', 1),('Plume', 2),('Scholastic', 3),('Bradbury & Evans', 4),('Goodreads', 5),('Ballantine Books', 6),('Aladdin', 7),('Thomas Nelson Inc.', 8),('HarperCollins', 9),('Harper', 10)"
+
+cVar.execute(s2)
+
+
+
+s3 = "INSERT INTO book_language (language_code, language_id, language_name) VALUES ('eng', 1, 'English'),('fre', 2, 'French'),('spa', 3, 'Spanish'),('en-GB', 4, 'British English')"
+
+
+cVar.execute(s3)
+
+
+
+s4 = "INSERT INTO book (title, book_id, isbn13, language_id, num_pages, publication_date, publisher_id) VALUES ('Abandon', 1, '9780545387699', 2, 320, '2011-04-26', 1010),('Bitten', 2, '9780452296640', 1, '400', '2001-10-01', 1820),('Catching Fire', 3, '9780439023498', 1, 391, '2009-09-01', 1010),('David Copperfield', 4, '9780679783411', 1, 624, '1850-11-01', 1345),('Eight Mile Island', 5, '1111111111111', 4, 133, '2012-07-14', 3020),('Fahrenheit 451', 6, ' 9781451673319', 2, 249, '2012-01-10', 5010),('Good Wives', 7, '9781534462489', 4, 368, '2019-11-12', 1243),('Hood', 8, ' 9781595540881', 5, 489, '2007-06-02', 5657),('I Am Number Four', 9, '9780061969553', 2, 448, '2010-08-03', 7878),('Jane Eyre', 10, '9781503278196', 3, 290, '2020-12-04', 1822)"
+
+cVar.execute(s4)
+
+
+
+s5 = "INSERT INTO book_author (book_id, author_id) VALUES (1570, 2823),(10539, 6439),(8323, 7011),(7344, 3760),(1234, 3456),(1580, 9742),(5609, 2345),(44567, 5567),(73488, 4564)"
+
+cVar.execute(s5)
+
+
+
+s6 = "INSERT INTO country (country_id, country_name) VALUES (1, 'Afghanistan'),(2, 'Bahamas'),(3, 'Canada'),(4, 'China'),(5, 'Dominican Republic'),(6, 'Finland'),(7, 'Georgia'),(8, 'Greece'),(9, 'Hungary'),(10, 'India'),(11, 'Jamaica'),(12, 'Kenya'),(13, 'Lithuania'),(14, 'Mexico'),(15, 'Netherlands'),(16, 'Portugal'),(17, 'Romania'),(18, 'South Korea'),(19, 'Thailand'),(20, 'United States of America'),(21, 'United Kingdom')"
+
+cVar.execute(s6)
+
+
+
+s7 = "INSERT INTO address (address_id, street_number, street_name, city, country_id) VALUES (1, '57', 'Glacier Hill Avenue', 'Torbat-e Jām', 1),(2, '86', 'Dottie Junction', 'Beaumont', 15),(3, '292', 'Ramsey Avenue', 'Cayambe', 3),(4, '5618', 'Thackeray Junction', 'Caldas', 5),(5, '4', '2nd Park', 'Ngunguru', 10),(6, '465', 'Shepherds Haven', 'Chikmagalur', 10),(7, '6788', 'Milne Grove', 'Uppsala', 6),(8, '3333', 'Brock Lane', 'Kayseri', 7)"
+
+# there are 8 street addresses
+
+cVar.execute(s7)
+
+
+s8 = "INSERT INTO customer (customer_id, first_name, last_name, email) VALUES (1, 'Ursola', 'Purdy', 'upurdy0@cdbaby.com'),(2, 'Ruthanne', 'Vatini', 'rvatini1@fema.gov'),(3, 'Reidar', 'Turbitt', 'rturbitt2@geocities.jp'),(4, 'Rich', 'Kirsz', 'rkirsz3@jalbum.net'),(5, 'Carline', 'Kupis', 'ckupis4@tamu.edu'),(6, 'Kandy', 'Adamec', 'kadamec5@weather.com'),(7, 'Jermain', 'Giraudeau', 'jgiraudeau6@elpais.com'),(8, 'Nolly', 'Bonicelli', 'nbonicelli7@examiner.com')"
+
+# there are 8 customers
+
+cVar.execute(s8)
+
+
+
+s9 = "INSERT INTO customer_address (customer_id, address_id, status_id) SELECT c.customer_id,(SELECT address_id FROM address ORDER BY RANDOM() LIMIT 1), 1 FROM customer c;"
+
+
+cVar.execute(s9)
+
+
+
+s10 = "INSERT OR IGNORE INTO customer_address (customer_id, address_id, status_id) SELECT customer_id, address_id, 1 FROM (SELECT ca.customer_id,(SELECT address_id FROM address ORDER BY RANDOM() LIMIT 1) AS address_id FROM customer_address ca ORDER BY RANDOM()) sub WHERE NOT EXISTS (SELECT 1 FROM customer_address c WHERE c.customer_id = sub.customer_id AND c.address_id = sub.address_id) LIMIT 5;"
+
+cVar.execute(s10)
+
+
+
+#s11 = "INSERT INTO cust_order (order_date, customer_id, shipping_method_id, dest_address_id) SELECT NOW() - INTERVAL FLOOR(RANDOM() * 365 * 3 * 24 * 60 * 60) SECOND AS order_date, c.customer_id, FLOOR(1 + RANDOM() * 4) AS shipping_method_id, ca.address_id FROM customer c INNER JOIN customer_address ca ON c.customer_id = ca.customer_id LIMIT 4;"
+
+#cVar.execute(s11)
+
+
+#select = "SELECT * from book"
+#for row in connection.execute(select):
+#    print(row)
+
+
+
+
+connection.close()
