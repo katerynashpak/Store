@@ -17,13 +17,13 @@ Choose an option: "
         1)
                 echo "view all items in store"
 		python3 display_all
-               	buyer_menu
+               	buyer_menu #func name
                 ;;
         2)
                 echo "purchase items"
 		python3 display_all
-		#
-                buyer_menu
+		python3 purchase
+                buyer_menu #func name
                 ;;
         3)
                 echo "view purchase history"

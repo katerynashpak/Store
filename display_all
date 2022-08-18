@@ -15,7 +15,7 @@ print ("ID        ", "Item Name             ", "Price    ")
 print ("............................................................")
 i = 0
 while i < row_count:
-    print (obj[i][0]," "*(12-len(obj[i])), obj[i][1]," "*(12-len(obj[i][1])), obj [i][2],"      "*(12-len(str(obj[i][2]))))
+    print (obj[i][0]," "*(12-len(obj[i])), obj[i][1]," "*(12-len(obj[i][1])), " "*(12-len(obj[i])), "$",obj[i][2]," "*(12-len(str(obj[i][2]))))
     i=i+1
 
 
