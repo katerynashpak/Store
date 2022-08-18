@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+import sqlite3
+connection = sqlite3.connect("store.db")
+cVar = connection.cursor()
+
+
+item = input("Choose an item to purchase: ")
+
+cVar.execute("SELECT * FROM store_items WHERE item_name = ?", (item,))
+data = cVar.fetchall()
+
+if len(data)==0:
+        print('There is no item named %s'%item)
+else:
+        print('Item %s found'%item)
+
+        #print(data)
+        cVar.execute("INSERT INTO cart SELECT item_name, item_price FROM store_items WHERE item_name = ?", (item,))
+        cVar.execute("SELECT * FROM cart")
+        cVar.fetchall()
+
+connection.close()
+

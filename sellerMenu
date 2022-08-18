@@ -21,7 +21,7 @@ Choose an option: "
                 ;;
         2)
                 echo "Insert new item(s)"
-		python3 store_tables
+		python3 populate
 
                 #main_menu
                 ;;
