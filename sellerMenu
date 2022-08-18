@@ -1,0 +1,52 @@
+#!/bin/bash
+
+source ./colors
+
+seller_menu(){
+        echo -ne "
+$(magentaprint 'SELLER MENU')
+$(greenprint '1)') View All Items
+$(greenprint '2)') Insert new item(s)
+$(greenprint '3)') Change item id/name/price
+$(greenprint '4)') Back to main menu
+$(greenprint '5)') Exit
+
+Choose an option: "
+        read -r opt
+        case $opt in
+        1)
+                echo "View All Items"
+                python3 display_all
+                #main_manu
+                ;;
+        2)
+                echo "Insert new item(s)"
+		python3 store_tables
+
+                #main_menu
+                ;;
+        3)
+                echo "Change item id/name/price"
+
+                #main_menu
+                ;;
+        4)
+                echo "back to main menu"
+		source ./mainMenu
+                ;;
+
+        5)
+                echo "Exit"
+                exit 0
+                ;;
+        *)
+                echo "Invalid Input"
+                exit 1
+                ;;
+        esac
+}
+
+
+
+seller_menu
+

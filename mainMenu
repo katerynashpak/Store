@@ -1,0 +1,40 @@
+#!/bin/bash
+
+source ./colors
+
+main_menu(){
+        echo -ne "
+$(magentaprint 'MAIN MENU')
+$(greenprint '1)') Buyer
+$(greenprint '2)') Seller
+$(greenprint '3)') Exit
+
+Choose an option: "
+        read -r opt
+        case $opt in
+        1)
+                echo "Buyer menu"
+                source ./buyerMenu
+                #main_manu
+                ;;
+        2)
+                echo "seller menu"
+		source ./sellerMenu
+                #main_menu
+                ;;
+
+        3)
+                echo "Exit"
+                exit 0
+                ;;
+        *)
+                echo "Invalid Input"
+                exit 1
+                ;;
+        esac
+}
+
+
+
+main_menu
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#COLORS
+
+ESC=$(printf '\033') RESET="${ESC}[0m" BLACK="${ESC}[30m" WHITE="${ESC}[37m"
+GREEN="${ESC}[32m" MAGENTA="${ESC}[35m" YELLOW="${ESC}[33m"
+
+#COLOR FUNCTIONS
+
+greenprint(){ printf "${GREEN}%s${RESET}\n" "$1"; }
+magentaprint(){ printf "${MAGENTA}%s${RESET}\n" "$1";}
+yellowprint(){ printf "${YELLOW}%s${RESET}\n" "$1";}
+
+#END_OF_PROGRAM
+

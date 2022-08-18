@@ -1,0 +1,52 @@
+#!/bin/bash
+
+source ./colors
+
+buyer_menu(){
+        echo -ne "
+$(magentaprint 'BUYER MENU')
+$(greenprint '1)') View All Items
+$(greenprint '2)') Purchase Items
+$(greenprint '3)') View Purchase History
+$(greenprint '4)') Back to Main Menu
+$(greenprint '5)') Exit
+
+Choose an option: "
+        read -r opt
+        case $opt in
+        1)
+                echo "view all items in store"
+		python3 display_all
+               	buyer_menu
+                ;;
+        2)
+                echo "purchase items"
+		python3 display_all
+		#
+                buyer_menu
+                ;;
+        3)
+                echo "view purchase history"
+              	
+                #main_menu
+                ;;
+	4)
+		echo "back to main menu"
+		source ./mainMenu
+		;;
+
+        5)
+                echo "Exit"
+                exit 0
+                ;;
+        *)
+                echo "Invalid Input"
+                exit 1
+                ;;
+        esac
+}
+
+
+
+buyer_menu
+
