@@ -17,18 +17,18 @@ Choose an option: "
         1)
                 echo "view all items in store"
 		python3 display_all
-               	buyer_menu #func name
+               	source ./buyerMenu #func name
                 ;;
         2)
                 echo "purchase items"
 		python3 display_all
 		python3 purchase
-                buyer_menu #func name
+                source ./buyerMenu #func name
                 ;;
         3)
                 echo "view purchase history"
-              	
-                #main_menu
+		python3 p_history
+		source ./buyerMenu
                 ;;
 	4)
 		echo "back to main menu"
