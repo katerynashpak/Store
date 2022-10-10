@@ -16,19 +16,19 @@ Choose an option: "
         case $opt in
         1)
                 echo "view all items in store"
-		python3 display_all
-               	source ./buyerMenu #func name
+		python3 display_all.py
+               	buyer_menu #func name
                 ;;
         2)
                 echo "purchase items"
-		python3 display_all
-		python3 purchase
-                source ./buyerMenu #func name
+		python3 display_all.py
+		python3 purchase.py
+                buyer_menu #func name
                 ;;
         3)
                 echo "view purchase history"
-		python3 p_history
-		source ./buyerMenu
+		python3 p_history.py
+		buyer_menu
                 ;;
 	4)
 		echo "back to main menu"
@@ -47,6 +47,6 @@ Choose an option: "
 }
 
 
-
 buyer_menu
+
 

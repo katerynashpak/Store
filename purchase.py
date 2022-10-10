@@ -59,6 +59,8 @@ while True:
     cVar.execute("SELECT * FROM store_items WHERE item_name = ?", (item,))
     data = cVar.fetchall()
 
+
+
     if len(data)==0:
             print('There is no item named %s'%item)
     else:

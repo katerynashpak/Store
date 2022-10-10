@@ -3,7 +3,11 @@
 source ./colors
 
 seller_menu(){
-        echo -ne "
+        
+    while [ 1 ]
+    do
+
+	echo -ne "
 $(magentaprint 'SELLER MENU')
 $(greenprint '1)') View All Items
 $(greenprint '2)') Insert new item(s)
@@ -14,37 +18,40 @@ $(greenprint '5)') Exit
 Choose an option: "
         read -r opt
         case $opt in
-        1)
+	1)
                 echo "View All Items"
-                python3 display_all
-                #main_manu
+                python3 display_all.py
+		
                 ;;
-        2)
+	2)
                 echo "Insert new item(s)"
-		python3 populate
-
-                #main_menu
-                ;;
-        3)
+		python3 populate.py
+	
+		;;
+	3)
                 echo "Change item id/name/price"
-
-                #main_menu
-                ;;
-        4)
-                echo "back to main menu"
+		python3 update_data.py
+		
+		;;
+	4)
+                echo "Back to main menu"
 		source ./mainMenu
                 ;;
 
-        5)
+	5)
                 echo "Exit"
                 exit 0
                 ;;
-        *)
-                echo "Invalid Input"
-                exit 1
-                ;;
-        esac
+
+	*)
+		echo "Invalid input"
+		exit 1
+		;;
+        
+	esac
+   done 
 }
+
 
 
 

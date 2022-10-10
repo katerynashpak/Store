@@ -15,7 +15,7 @@ Choose an option: "
         1)
                 echo "Buyer menu"
                 source ./buyerMenu
-                #main_manu
+                #main_menu
                 ;;
         2)
                 echo "seller menu"
