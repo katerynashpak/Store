@@ -16,7 +16,8 @@ $(greenprint '4)') Back to main menu
 $(greenprint '5)') Exit
 
 Choose an option: "
-        read -r opt
+        read -N 10000000 -t 0.01
+	read -r opt
         case $opt in
 	1)
                 echo "View All Items"

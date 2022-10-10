@@ -10,6 +10,7 @@ cVar = connection.cursor()
 #connection.commit()
 
 display_all
+print("\n")
 
 def update_data():
 

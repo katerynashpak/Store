@@ -4,6 +4,8 @@ import sqlite3
 import sys
 import os
 
+
+
 connection = sqlite3.connect("store.db")
 cVar = connection.cursor()
 
@@ -12,7 +14,7 @@ cVar = connection.cursor()
 def calc_total(data1):
     cVar.execute("SELECT SUM(item_price) FROM cart")
     total = cVar.fetchone()
-    print("Total: $",total[0])
+    print("Total: $",round(total[0], 2))
 
 
 #-----------------------Display the Cart to the User--------------------------------
@@ -91,4 +93,7 @@ while True:
 
 
 connection.close()
+
+
+
 
